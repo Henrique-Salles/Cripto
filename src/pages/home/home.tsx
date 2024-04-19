@@ -16,6 +16,10 @@ export function Home() {
     navigate(`/details/${input}`);
   }
 
+  function handleGetMore() {
+    alert("TESTE");
+  }
+
   return (
     <main className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -69,6 +73,10 @@ export function Home() {
           </tr>
         </tbody>
       </table>
+
+      <button className={styles.buttonMore} onClick={handleGetMore}>
+        Carregar mais
+      </button>
     </main>
   );
 }
