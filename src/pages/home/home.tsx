@@ -105,31 +105,41 @@ export function Home() {
         </thead>
 
         <tbody id="tbody">
-          <tr className={styles.tr}>
-            <td className={styles.tdLabel} data-label="Moeda">
-              <div className={styles.name}>
-                <Link to={"/details/bitcoin"}>
-                  <span>Bitcoin</span> | BTC
-                </Link>
-              </div>
-            </td>
+          {coin.length > 0 &&
+            coin.map((item) => (
+              <tr className={styles.tr} key={item.id}>
+                <td className={styles.tdLabel} data-label="Moeda">
+                  <div className={styles.name}>
+                    <Link to={`/detail/${item.id}`}>
+                      <span>{item.name}</span> | {item.symbol}
+                    </Link>
+                  </div>
+                </td>
 
-            <td className={styles.tdLabel} data-label="Valor de mercado">
-              1T
-            </td>
+                <td className={styles.tdLabel} data-label="Valor de mercado">
+                  {item.formatedMarket}
+                </td>
 
-            <td className={styles.tdLabel} data-label="Preço">
-              8.000
-            </td>
+                <td className={styles.tdLabel} data-label="Preço">
+                  {item.formatedPrice}
+                </td>
 
-            <td className={styles.tdLabel} data-label="Volume">
-              2B
-            </td>
+                <td className={styles.tdLabel} data-label="Volume">
+                  {item.formatedVolume}
+                </td>
 
-            <td className={styles.tdProfit} data-label="Mudança 24h">
-              <span>1.20</span>
-            </td>
-          </tr>
+                <td
+                  className={
+                    Number(item.changePercent24Hr) > 0
+                      ? styles.tdProfit
+                      : styles.tdLoss
+                  }
+                  data-label="Mudança 24h"
+                >
+                  <span>{Number(item.changePercent24Hr).toFixed(3)}%</span>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
