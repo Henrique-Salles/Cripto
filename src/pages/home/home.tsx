@@ -16,6 +16,9 @@ interface CoinProps {
   changePercent24Hr: string;
   vwap24Hr: string;
   explorer: string;
+  formatedPrice?: string;
+  formatedMarket?: string;
+  formatedVolume?: string;
 }
 
 interface DataProps {
@@ -42,16 +45,25 @@ export function Home() {
           currency: "USD",
         });
 
+        const priceCompact = Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          notation: "compact",
+        });
+
         const formatedResult = coinsData.map((item) => {
           const formated = {
             ...item,
             formatedPrice: price.format(Number(item.priceUsd)),
+            formatedMarket: priceCompact.format(Number(item.marketCapUsd)),
+            formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr)),
           };
 
           return formated;
         });
 
-        console.log(formatedResult);
+        setCoin(formatedResult);
+        //console.log(formatedResult);
       });
   }
 
