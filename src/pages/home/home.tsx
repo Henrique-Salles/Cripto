@@ -121,7 +121,7 @@ export function Home() {
                       alt="logo cripto"
                       className={styles.logo}
                     />
-                    <Link to={`/detail/${item.id}`}>
+                    <Link to={`/details/${item.id}`}>
                       <span>{item.name}</span> | {item.symbol}
                     </Link>
                   </div>
